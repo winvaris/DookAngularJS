@@ -17,6 +17,7 @@
     <div ng-controller="tab1" ng-show="ui.isCurrent(1);">Tab 1
         <ul ng-repeat="item in list">
             <li ng-class="{ 'done': item.complete }">{{item.name}}</li>
+            <button ng-click="complete(item)">Done/Undone</button>
         </ul>
     </div>
     <div ng-controller="tab2" ng-show="ui.isCurrent(2);">Tab 2

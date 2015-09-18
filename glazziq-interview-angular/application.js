@@ -23,6 +23,12 @@ angular.module('todo', [])
                 name: 'buy milk',
                 complete: true
             }];
+            $s.complete = function(item) {
+                if (item.complete)
+                    item.complete = false;
+                else
+                    item.complete = true;
+            }
 
     }])
     .controller('tab2', ['$scope',
