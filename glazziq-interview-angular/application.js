@@ -27,6 +27,18 @@ function ($s, todoApi) {
         }
     }
 
+    $s.move = function(item, id) {
+        var tempData = todoApi.query();
+        for (var i = 0; i < tempData.length; i++)
+        {
+            if (typeof id != 'undefined' && tempData[i] == item && id != uiCurrent && id <= tabNum && id >= 1)
+            {
+                tempData[i].list = $s.tab[id - 1].tabName;
+                todoApi.create(tempData[i]);
+                todoApi.destroy(i);
+            }
+        }
+    }
 
     $s.marker = function(item) {
         if (item.complete)

@@ -23,11 +23,12 @@
           <div ng-if = "element.list == item.tabName">
             <li ng-class="{ 'done': element.complete }">{{element.name}}</li>
             <button ng-click = "marker(element)">Done/Undone</button>
+            <button ng-click = "move(element, moveTo)">Move To Tab#</button>
+            <input type="number" ng-model="moveTo">
           </div>
         </ul>
       </div>
     </ul>
-
 </div>
 
 </body>
