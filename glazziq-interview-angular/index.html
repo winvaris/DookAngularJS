@@ -3,28 +3,31 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
   <title></title>
-  <script src="angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
   <script src="application.js"></script>
   <link rel="stylesheet" type="text/css" href="application.css">
   
 </head>
 <body>
   
-<div ng-app="todo" ng-controller="page"> <a href="" ng-click="ui.current(1);">Tab 1</a>
- <a href="" ng-click="ui.current(2);">Tab 2</a>
+<div ng-app="todo" ng-controller="page">
+  <li ng-repeat = "item in tab">
+    <a href = "" ng-click = "ui.current(item.tabID)">{{item.tabID}}: {{item.tabName}}</a>
+  </li>
 
-    <hr/>
-    <div ng-controller="tab1" ng-show="ui.isCurrent(1);">Tab 1
-        <ul ng-repeat="item in list">
-            <li ng-class="{ 'done': item.complete }">{{item.name}}</li>
-            <button ng-click="complete(item)">Done/Undone</button>
+  <hr/>
+    <ul ng-repeat = "item in tab">
+      <div ng-show="ui.isCurrent(item.tabID);">
+        <h3>{{item.tabID}}: {{item.tabName}}</h3>
+        <ul ng-repeat = "element in backupData">
+          <div ng-if = "element.list == item.tabName">
+            <li ng-class="{ 'done': element.complete }">{{element.name}}</li>
+            <button ng-click = "marker(element)">Done/Undone</button>
+          </div>
         </ul>
-    </div>
-    <div ng-controller="tab2" ng-show="ui.isCurrent(2);">Tab 2
-        <ul ng-repeat="item in list">
-            <li ng-class="{ 'done': item.complete }">{{item.name}}</li>
-        </ul>
-    </div>
+      </div>
+    </ul>
+
 </div>
 
 </body>

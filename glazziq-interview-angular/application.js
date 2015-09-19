@@ -1,50 +1,42 @@
 angular.module('todo', [])
-    .controller('page', ['$scope',
-        function ($s) {
-            var uiCurrent = 1;
-            $s.ui = {
-                current: function (newUICurrent) {
-                    if (typeof newUICurrent != 'undefined') {
-                        uiCurrent = newUICurrent;
-                    }
-                    return uiCurrent;
-                },
-                isCurrent: function (c) {
-                    return (uiCurrent === c);
-                }
-            };
-    }])
-    .controller('tab1', ['$scope',
-        function ($s) {
-            $s.list = [{
-                name: 'buy eggs',
-                complete: false
-            }, {
-                name: 'buy milk',
-                complete: true
-            }];
-            $s.complete = function(item) {
-                if (item.complete)
-                    item.complete = false;
-                else
-                    item.complete = true;
-            }
+    .controller('page', ['$scope', 'todoApi',
 
-    }])
-    .controller('tab2', ['$scope',
-        function ($s) {
-        $s.list = [{
-            name: 'collect underpants',
-            complete: false
-        }, {
-            name: '...',
-            complete: false
-        }, {
-            name: 'profit',
-            complete: false
-        }];
-    }])
-    .factory('todoApi', [function () {
+function ($s, todoApi) {
+    var uiCurrent = 1;
+    var tabNum = 2;
+
+    $s.tab = [{
+        tabID: 1,
+        tabName: 'shopping'
+    }, {
+        tabID: 2,
+        tabName: 'business'
+    }]
+
+    $s.backupData = todoApi.query();
+
+    $s.ui = {
+        current: function (newUICurrent) {
+            if (typeof newUICurrent != 'undefined') {
+                uiCurrent = newUICurrent;
+            }
+            return uiCurrent;
+        },
+        isCurrent: function (c) {
+            return (uiCurrent === c);
+        }
+    }
+
+
+    $s.marker = function(item) {
+        if (item.complete)
+            item.complete = false;
+        else
+            item.complete = true;
+    };
+
+}])
+.factory('todoApi', [function () {
     var data = [
         {
             list: 'shopping',
