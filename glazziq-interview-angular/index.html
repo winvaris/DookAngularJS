@@ -25,10 +25,17 @@
             <button ng-click = "marker(element)">Done/Undone</button>
             <button ng-click = "move(element, moveTo)">Move To Tab#</button>
             <input type="number" ng-model="moveTo">
+            <button ng-click = "remove(element)">x</button>
           </div>
         </ul>
       </div>
     </ul>
+    <h2>Add item in tab</h2>
+    <input type="text" ng-model="add">
+    <button ng-click = "adder()">Add Item</button>
+    <h1>Create new tab</h1>
+    <input type="text" ng-model="newTabAdd">
+    <button ng-click = "newTabAdder()">New Tab</button>
 </div>
 
 </body>

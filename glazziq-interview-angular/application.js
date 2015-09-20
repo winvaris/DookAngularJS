@@ -40,6 +40,31 @@ function ($s, todoApi) {
         }
     }
 
+    $s.adder = function() {
+        if (typeof $s.add != 'undefined')
+        {
+            todoApi.create({list: $s.tab[uiCurrent - 1].tabName, name: $s.add, complete: false});
+            $s.backupData = todoApi.query();
+        }
+    }
+
+    $s.newTabAdder = function() {
+        if (typeof $s.newTabAdd != 'undefined')
+        {
+            $s.tab.push({tabID: ++tabNum, tabName: $s.newTabAdd});
+            uiCurrent = tabNum;
+        }
+    }
+
+    $s.remove = function(item) {
+        var tempData = todoApi.query();
+        for (var i = 0; i < tempData.length; i++)
+        {
+            if (tempData[i] == item)
+                todoApi.destroy(i);
+        }
+    }
+
     $s.marker = function(item) {
         if (item.complete)
             item.complete = false;
